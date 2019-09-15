@@ -6,9 +6,10 @@
       evt.preventDefault();
 
       var url_list = '';
+      var image_list = '';
       for (var i = 0; i < evt.target.files.length; i++) {
-        var img = $('img')[i];
-        img.src = URL.createObjectURL(this.files[i]);
+        var src = URL.createObjectURL(this.files[i]);
+        image_list += '<li><img id="myImg" src="'+ src + '"></li>';
         var file = evt.target.files[i];
         var metadata = {
           'contentType': file.type
@@ -21,9 +22,11 @@
         var url = await snapshot.ref.getDownloadURL();
         console.log('File available at', url);
         url_list += '<li><a href="' + url + '">' + file.name + '</a></li>';
+        
         console.log(url_list);
       }
       $('#messagesDiv > div.list-urls').html(url_list); 
+      $('#messagesDiv > div.image-lists').html(image_list);
     }
 
     window.addEventListener('load', function() {
