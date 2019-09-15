@@ -109,4 +109,22 @@
         }).catch(function(error) {
         // Handle any errors
         });
+
+        storageRef.child('audio_files/audio_output_1.mp3').getDownloadURL().then(function(url) {
+            $('.audio-one').html('<source src="' + url + '" type="audio/mpeg">')
+        }).catch(function(error) {
+
+        });
+
+        storageRef.child('audio_files/audio_output_2.mp3').getDownloadURL().then(function(url) {
+            $('.audio-two').html('<source src="' + url + '" type="audio/mpeg">')
+        }).catch(function(error) {
+
+        });
+
+        storageRef.child('audio_files/audio_output_3.mp3').getDownloadURL().then(function(url) {
+            $('.audio-three').html('<source src="' + url + '" type="audio/mpeg">')
+        }).catch(function(error) {
+
+        });
     }
