@@ -1,6 +1,7 @@
     var auth = firebase.auth();
     var storageRef = firebase.storage().ref();
 
+    //Upload everything to Firebase
     async function handleFileSelect(evt) {
       evt.stopPropagation();
       evt.preventDefault();
@@ -31,6 +32,7 @@
       storageRef.putString(image_name_list);
     }
 
+    //Initialization
     window.addEventListener('load', function() {
       document.getElementById('file').addEventListener('change', handleFileSelect, false);
       document.getElementById('file').disabled = true;
@@ -51,7 +53,8 @@
         }
       });
     });
-      
+    
+    //Clear all of Firebase
     document.getElementById('back-and-clear').onclick = function() {
         var to_delete = ['audio_files/audio_output_1.mp3', 'audio_files/audio_output_2.mp3', 'audio_files/audio_output_3.mp3',
         'text_files/text_output_1.txt','text_files/text_output_2.txt', 'text_files/text_output_3.txt']
@@ -59,8 +62,51 @@
             var fileRef = storageRef.child(element);
             fileRef.delete().then(function() {
             }).catch((error) => {
-                
+
             });
         });
+    }
 
+    document.getElementById('fetch-data').onclick = function() {
+        storageRef.child('text_files/text_output_1.txt').getDownloadURL().then(function(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'text';
+            xhr.open('GET', url);
+            xhr.onload = function(event) {
+              var blob = xhr.responseText;
+              $('.text-one').html(blob);
+            };
+            xhr.send();
+
+          }).catch(function(error) {
+            // Handle any errors
+          });
+
+        storageRef.child('text_files/text_output_2.txt').getDownloadURL().then(function(url) {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'text';
+        xhr.open('GET', url);
+        xhr.onload = function(event) {
+            var blob = xhr.responseText;
+            $('.text-two').html(blob);
+        };
+        xhr.send();
+
+        }).catch(function(error) {
+        // Handle any errors
+        });
+
+        storageRef.child('text_files/text_output_3.txt').getDownloadURL().then(function(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'text';
+            xhr.open('GET', url);
+            xhr.onload = function(event) {
+              var blob = xhr.responseText;
+              $('.text-three').html(blob);
+            };
+            xhr.send();
+
+        }).catch(function(error) {
+        // Handle any errors
+        });
     }
