@@ -50,7 +50,7 @@ limitations under the License.
           <div class="mdl-card__supporting-text mdl-color-text--grey-600" id="messagesDiv">
             <p>Select a file below. When it is uploaded, a link will be displayed to the uploaded file.</p>
             <h6>Choose File</h6>
-            <input type="file" id="file" name="file"/> <br>
+            <input type="file" id="file" name="file" multiple/> <br>
             <h6>File URL:</h6>
             <span id="linkbox"></span>
           </div>
@@ -78,30 +78,30 @@ limitations under the License.
     function handleFileSelect(evt) {
       evt.stopPropagation();
       evt.preventDefault();
-      var file = evt.target.files[0];
-
-      var metadata = {
-        'contentType': file.type
-      };
 
       // Push to child path.
       // [START oncomplete]
-      storageRef.child('images/' + file.name).put(file, metadata).then(function(snapshot) {
-        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-        console.log('File metadata:', snapshot.metadata);
-        // Let's get a download URL for the file.
-        snapshot.ref.getDownloadURL().then(function(url) {
-          console.log('File available at', url);
-          // [START_EXCLUDE]
-          document.getElementById('linkbox').innerHTML = '<a href="' +  url + '">Click For File</a>';
-          // [END_EXCLUDE]
+      for (var i = 0; i < evt.target.files.length; i++) {
+        var file = evt.target.files[i];
+        var metadata = {
+          'contentType': file.type
+        };
+
+        storageRef.child('images/' + file.name).put(file, metadata).then(function(snapshot) {
+          console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+          console.log('File metadata:', snapshot.metadata);
+          // Let's get a download URL for the file.
+          snapshot.ref.getDownloadURL().then(function(url) {
+            console.log('File available at', url);
+          });
+        }).catch(function(error) {
+          // [START onfailure]
+          console.error('Upload failed:', error);
+          // [END onfailure]
         });
-      }).catch(function(error) {
-        // [START onfailure]
-        console.error('Upload failed:', error);
-        // [END onfailure]
-      });
       // [END oncomplete]
+
+      }
     }
 
 
