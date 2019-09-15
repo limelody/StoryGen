@@ -1,3 +1,11 @@
+Image Captioning & Story Generation
+=========================================
+
+Link to Google Colab notebook for image captioning and story generation:
+https://colab.research.google.com/drive/1pvdBQilg-jG8V-qvB3k4QuFyQL7E-9ao
+
+
+
 Firebase SDK for Cloud Storage Quickstart
 =========================================
 
@@ -20,4 +28,3 @@ License
 © Google, 2016. Licensed under an [Apache-2](../LICENSE) license.
 
 Base Source Code [here](https://github.com/firebase/quickstart-js/tree/master/storage).
-
