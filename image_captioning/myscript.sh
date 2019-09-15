@@ -1,0 +1,1 @@
+! python sample.py --image=images/group_meeting.png
