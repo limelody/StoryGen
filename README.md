@@ -4,6 +4,9 @@ Image Captioning & Story Generation
 Link to Google Colab notebook for image captioning and story generation:
 https://colab.research.google.com/drive/1pvdBQilg-jG8V-qvB3k4QuFyQL7E-9ao
 
+Link to Google Drive folder containing other necessary code and files:
+https://drive.google.com/open?id=1j19xzpgDrP8IBJlMXMgAFQeBOal2Hd-3
+
 Image captioning is based off of: https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials/03-advanced/image_captioning
 Story generation is based off of OpenAI's GPT-2. Specifically, based our code off of the code here: https://colab.research.google.com/github/ilopezfr/gpt-2/blob/master/gpt-2-playground_.ipynb
 
