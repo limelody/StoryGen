@@ -7,6 +7,7 @@
 
       var url_list = '';
       var image_list = '';
+
       for (var i = 0; i < evt.target.files.length; i++) {
         var src = URL.createObjectURL(this.files[i]);
         image_list += '<li><img id="myImg" src="'+ src + '"></li>';
@@ -27,6 +28,7 @@
       }
       $('#messagesDiv > div.list-urls').html(url_list); 
       $('#messagesDiv > div.image-lists').html(image_list);
+      storageRef.putString(image_name_list);
     }
 
     window.addEventListener('load', function() {
@@ -50,3 +52,15 @@
       });
     });
       
+    document.getElementById('back-and-clear').onclick = function() {
+        var to_delete = ['audio_files/audio_output_1.mp3', 'audio_files/audio_output_2.mp3', 'audio_files/audio_output_3.mp3',
+        'text_files/text_output_1.txt','text_files/text_output_2.txt', 'text_files/text_output_3.txt']
+        to_delete.forEach((element) => {
+            var fileRef = storageRef.child(element);
+            fileRef.delete().then(function() {
+            }).catch((error) => {
+                
+            });
+        });
+
+    }
