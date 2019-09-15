@@ -67,64 +67,37 @@
         });
     }
 
-    document.getElementById('fetch-data').onclick = function() {
-        storageRef.child('text_files/text_output_1.txt').getDownloadURL().then(function(url) {
+    //Download text function
+    function downloadTextandRender(path, selector) {
+        storageRef.child(path).getDownloadURL().then(function(url) {
             var xhr = new XMLHttpRequest();
             xhr.responseType = 'text';
             xhr.open('GET', url);
             xhr.onload = function(event) {
               var blob = xhr.responseText;
-              $('.text-one').html(blob);
+              $(selector).html(blob);
             };
             xhr.send();
 
           }).catch(function(error) {
             // Handle any errors
           });
-
-        storageRef.child('text_files/text_output_2.txt').getDownloadURL().then(function(url) {
-        var xhr = new XMLHttpRequest();
-        xhr.responseType = 'text';
-        xhr.open('GET', url);
-        xhr.onload = function(event) {
-            var blob = xhr.responseText;
-            $('.text-two').html(blob);
-        };
-        xhr.send();
-
-        }).catch(function(error) {
-        // Handle any errors
-        });
-
-        storageRef.child('text_files/text_output_3.txt').getDownloadURL().then(function(url) {
-            var xhr = new XMLHttpRequest();
-            xhr.responseType = 'text';
-            xhr.open('GET', url);
-            xhr.onload = function(event) {
-              var blob = xhr.responseText;
-              $('.text-three').html(blob);
-            };
-            xhr.send();
-
-        }).catch(function(error) {
-        // Handle any errors
-        });
-
-        storageRef.child('audio_files/audio_output_1.mp3').getDownloadURL().then(function(url) {
-            $('.audio-one').html('<source src="' + url + '" type="audio/mpeg">')
+    }
+    //Download audio function
+    function downloadAudioandRender(path, selector) {
+        storageRef.child(path).getDownloadURL().then(function(url) {
+            $(selector).html('<source src="' + url + '" type="audio/mpeg">')
         }).catch(function(error) {
 
         });
+    }
 
-        storageRef.child('audio_files/audio_output_2.mp3').getDownloadURL().then(function(url) {
-            $('.audio-two').html('<source src="' + url + '" type="audio/mpeg">')
-        }).catch(function(error) {
-
-        });
-
-        storageRef.child('audio_files/audio_output_3.mp3').getDownloadURL().then(function(url) {
-            $('.audio-three').html('<source src="' + url + '" type="audio/mpeg">')
-        }).catch(function(error) {
-
-        });
+    //Fetch all data to render webpage with
+    document.getElementById('fetch-data').onclick = function() {
+        downloadTextandRender('text_files/text_output_1.txt', '.text-one');
+        downloadTextandRender('text_files/text_output_2.txt', '.text-two');
+        downloadTextandRender('text_files/text_output_3.txt', '.text-three');
+        downloadAudioandRender('audio_files/audio_output_1.mp3', '.audio-one');
+        downloadAudioandRender('audio_files/audio_output_2.mp3', '.audio-two');
+        downloadAudioandRender('audio_files/audio_output_3.mp3', '.audio-three');
     }
