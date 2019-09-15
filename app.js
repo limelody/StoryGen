@@ -1,36 +1,30 @@
-
     var auth = firebase.auth();
     var storageRef = firebase.storage().ref();
 
-    function handleFileSelect(evt) {
+    async function handleFileSelect(evt) {
       evt.stopPropagation();
       evt.preventDefault();
 
-      // Push to child path.
-      // [START oncomplete]
+      var url_list = '';
       for (var i = 0; i < evt.target.files.length; i++) {
         var file = evt.target.files[i];
         var metadata = {
           'contentType': file.type
         };
 
-        storageRef.child('images/' + file.name).put(file, metadata).then(function(snapshot) {
-          console.log('Uploaded', snapshot.totalBytes, 'bytes.');
-          console.log('File metadata:', snapshot.metadata);
-          // Let's get a download URL for the file.
-          snapshot.ref.getDownloadURL().then(function(url) {
-            console.log('File available at', url);
-          });
-        }).catch(function(error) {
-          // [START onfailure]
-          console.error('Upload failed:', error);
-          // [END onfailure]
-        });
-      // [END oncomplete]
-
+        var snapshot = await storageRef.child('images/' + file.name).put(file, metadata);
+        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+        console.log('File metadata:', snapshot.metadata);
+        // Let's get a download URL for the file.
+        var url = await snapshot.ref.getDownloadURL();
+        console.log('File available at', url);
+        url_list += '<li><a href="' + url + '">' + file.name + '</a></li>';
+        console.log(url_list);
       }
-    }
 
+      console.log(url_list);
+      $('#messagesDiv > div > ul').html(url_list); 
+    }
 
     window.onload = function() {
       document.getElementById('file').addEventListener('change', handleFileSelect, false);
