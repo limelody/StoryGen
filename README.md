@@ -8,7 +8,8 @@ Link to Google Drive folder containing other necessary code and files:
 https://drive.google.com/open?id=1j19xzpgDrP8IBJlMXMgAFQeBOal2Hd-3
 
 Image captioning is based off of: https://github.com/yunjey/pytorch-tutorial/tree/master/tutorials/03-advanced/image_captioning
-Story generation is based off of OpenAI's GPT-2. Specifically, based our code off of the code here: https://colab.research.google.com/github/ilopezfr/gpt-2/blob/master/gpt-2-playground_.ipynb
+
+Story generation is based off of OpenAI's GPT-2; specifically, based our code on this: https://colab.research.google.com/github/ilopezfr/gpt-2/blob/master/gpt-2-playground_.ipynb
 
 The image captioning uses the resnet-152 model pretrained on the ILSVRC-2012-CLS image classification dataset. The encoder is a convolutional neural network (CNN) and decoder a long short-term memory (LSTM) network. You can download a pretrained model here: https://www.dropbox.com/s/ne0ixz5d58ccbbz/pretrained_model.zip?dl=0. Extract pretrained_model.zip to image_captioning/models/.
 
